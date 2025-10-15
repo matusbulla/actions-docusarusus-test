@@ -19,6 +19,11 @@ jobs:
           node-version: '20.x'
       - run: npm version
       - run: npm run build
+      - name: Archive build/ artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-folder-artifacts-docusaurus
+          path: build/
   
   test-of-html:
     runs-on: ubuntu-24.04
@@ -29,8 +34,14 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: '20.x'
-      - run: npm install htmlhint -g
-      - run: htmlhint --version
-      - run: npx htmlhint build/
-    
+      - run: | 
+          npm install htmlhint -g
+          htmlhint --version
+          npx htmlhint build/
+      - name: Download build/ artifacts
+        uses: actions/download-artifact@v5
+        with:
+          name: build-folder-artifacts-docusaurus
+
+        
 
