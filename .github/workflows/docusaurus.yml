@@ -45,7 +45,14 @@ jobs:
           npx htmlhint build/
 
         
-
+  deploy-page:
+    runs-on: ubuntu-24.04
+    needs: test-of-html
+    steps:
+      - name: Deplot to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+      
 
         
 
