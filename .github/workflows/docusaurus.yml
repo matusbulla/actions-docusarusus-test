@@ -54,14 +54,14 @@ jobs:
     needs: test-of-html
     steps:
     - name: Download build/ artifacts
-        uses: actions/download-artifact@v5
-        with:
-          name: build-folder-artifacts-docusaurus
-          path: build/
-      - name: Deplot to GitHub Pages
-        uses: actions/deploy-pages@v4
-        with:
-          folder: build/
+      uses: actions/download-artifact@v5
+      with:
+        name: build-folder-artifacts-docusaurus
+        path: build/
+    - name: Deplot to GitHub Pages
+      uses: actions/deploy-pages@v4
+      with:
+        folder: build/
       
 
         
