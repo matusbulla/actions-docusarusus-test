@@ -1,0 +1,64 @@
+name: docusaurus cicd
+run-name: ${{ github.actor }} is trying actions to make docusaurus
+on:
+  push:
+    branches: 
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-job:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Initialize Node.JS for this job
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20.x'
+      - run: npm version
+      - run: npm run build
+      - name: Archive build/ artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-folder-artifacts-docusaurus
+          path: build/
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: build/
+  
+  test-of-html:
+    runs-on: ubuntu-24.04
+    needs: build-job
+    steps:
+      - uses: actions/checkout@v5
+      - name: Download build/ artifacts
+        uses: actions/download-artifact@v5
+        with:
+          name: build-folder-artifacts-docusaurus
+          path: build/
+      - name: Initialize Node.JS for this job
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20.x'
+      - run: | 
+          npm install htmlhint -g
+          htmlhint --version
+          npx htmlhint build/
+
+        
+  deploy-page:
+    needs: test-of-html
+    permissions:
+      pages: write
+      id-token: write
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Deplot to GitHub Pages
+        uses: actions/deploy-pages@v4
+      
+
+        
+
