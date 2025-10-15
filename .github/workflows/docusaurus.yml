@@ -20,12 +20,15 @@ jobs:
       - run: npm version
       - run: npm run build
   
-  test-of-markdown:
+  test-of-html:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
-      - name: GHA initialization of markdownlint-cli2-action 
-        uses: DavidAnson/markdownlint-cli2-action@v9
-      - run: markdownlint-cli-2 -v
+      - name: Initialize Node.JS for this job
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20.x'
+      - run: npm install htmlhint -g
+      - run: htmlhint --version
     
 
