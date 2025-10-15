@@ -34,14 +34,23 @@ jobs:
         uses: actions/download-artifact@v5
         with:
           name: build-folder-artifacts-docusaurus
-      - name: Initialize Node.JS for this job
-        uses: actions/setup-node@v6
-        with:
-          node-version: '20.x'
-      - run: | 
-          npm install htmlhint -g
-          htmlhint --version
-          npx htmlhint build-folder-artifacts-docusaurus/
+      #- name: Initialize Node.JS for this job
+      #  uses: actions/setup-node@v6
+      #  with:
+      #    node-version: '20.x'
+      #- run: | 
+      #    npm install htmlhint -g
+      #    htmlhint --version
+      #    npx htmlhint build-folder-artifacts-docusaurus/
+      - name: list files after artifact download
+        run: |
+            echo "=== Current working directory ==="
+            pwd
+            echo "=== Files in current directory ==="
+            ls -lah
+            echo "=== Recursive list of everything downloaded ==="
+            ls -R
+        
 
 
         
