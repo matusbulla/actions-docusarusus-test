@@ -22,6 +22,7 @@ jobs:
   
   test-of-html:
     runs-on: ubuntu-24.04
+    needs: build-job
     steps:
       - uses: actions/checkout@v5
       - name: Initialize Node.JS for this job
@@ -30,5 +31,6 @@ jobs:
           node-version: '20.x'
       - run: npm install htmlhint -g
       - run: htmlhint --version
+      - run: npx htmlhint build/
     
 
