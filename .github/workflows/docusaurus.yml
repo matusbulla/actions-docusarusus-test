@@ -30,6 +30,10 @@ jobs:
     needs: build-job
     steps:
       - uses: actions/checkout@v5
+      - name: Download build/ artifacts
+        uses: actions/download-artifact@v5
+        with:
+          name: build-folder-artifacts-docusaurus
       - name: Initialize Node.JS for this job
         uses: actions/setup-node@v6
         with:
@@ -38,10 +42,7 @@ jobs:
           npm install htmlhint -g
           htmlhint --version
           npx htmlhint build/
-      - name: Download build/ artifacts
-        uses: actions/download-artifact@v5
-        with:
-          name: build-folder-artifacts-docusaurus
+
 
         
 
