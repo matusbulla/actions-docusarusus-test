@@ -25,7 +25,7 @@ jobs:
           name: build-folder-artifacts-docusaurus
           path: build/
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v4
         with:
           path: build/
   
