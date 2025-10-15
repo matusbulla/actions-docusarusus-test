@@ -1,0 +1,15 @@
+name: docusaurus cicd
+run-name: ${{ github.actor }} is trying actions to make docusaurus
+on:
+  push:
+    branches: 
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-job:
+    runs-on: ubuntu-24.04
+    steps:
+      - run: npm version
