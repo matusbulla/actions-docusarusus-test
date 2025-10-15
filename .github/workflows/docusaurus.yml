@@ -1,9 +1,5 @@
 name: docusaurus cicd
 run-name: ${{ github.actor }} is trying actions to make docusaurus
-permissions:
-  contents: read
-  pages: write
-  id-token: write
 on:
   push:
     branches: 
@@ -28,6 +24,10 @@ jobs:
         with:
           name: build-folder-artifacts-docusaurus
           path: build/
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: build/
   
   test-of-html:
     runs-on: ubuntu-24.04
@@ -50,14 +50,15 @@ jobs:
 
         
   deploy-page:
-    runs-on: ubuntu-24.04
     needs: test-of-html
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-24.04
     steps:
-      - name: Download build/ artifacts
-        uses: actions/download-artifact@v5
-        with:
-          name: build-folder-artifacts-docusaurus
-          path: build/
       - name: Deplot to GitHub Pages
         uses: actions/deploy-pages@v4
         with:
