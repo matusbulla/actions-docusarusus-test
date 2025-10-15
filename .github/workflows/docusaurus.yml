@@ -54,15 +54,10 @@ jobs:
     permissions:
       pages: write
       id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-24.04
     steps:
       - name: Deplot to GitHub Pages
         uses: actions/deploy-pages@v4
-        with:
-          folder: build/
       
 
         
