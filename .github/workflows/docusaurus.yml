@@ -24,11 +24,8 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
-      - name: Initialize Node.JS for this job
-        uses: actions/setup-node@v6
-        with:
-          node-version: '20.x'
-      - run: npm install markdown-lint-cli2 --global
+      - name: GHA initialization of markdownlint-cli2-action 
+        uses: DavidAnson/markdownlint-cli2-action@v9
       - run: markdownlint-cli-2 -v
     
 
