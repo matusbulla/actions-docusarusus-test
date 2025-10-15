@@ -39,6 +39,7 @@ jobs:
         with:
           node-version: '20.x'
       - run: | 
+          npm install htmlhint -g
           htmlhint --version
           npx htmlhint build-folder-artifacts-docusaurus
 
