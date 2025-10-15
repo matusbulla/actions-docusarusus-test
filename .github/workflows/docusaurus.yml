@@ -34,6 +34,7 @@ jobs:
         uses: actions/download-artifact@v5
         with:
           name: build-folder-artifacts-docusaurus
+          path: build/
       #- name: Initialize Node.JS for this job
       #  uses: actions/setup-node@v6
       #  with:
