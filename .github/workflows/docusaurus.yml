@@ -41,7 +41,7 @@ jobs:
       - run: | 
           npm install htmlhint -g
           htmlhint --version
-          npx htmlhint build-folder-artifacts-docusaurus
+          npx htmlhint build-folder-artifacts-docusaurus/
 
 
         
