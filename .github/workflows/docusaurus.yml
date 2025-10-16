@@ -28,7 +28,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          name: docusaurus-build
+          name: github-pages
           path: build/
 
   test-of-html:
@@ -41,7 +41,7 @@ jobs:
       - name: Download build/ artifacts
         uses: actions/download-artifact@v5
         with:
-          name: docusaurus-build
+          name: github-pages
           path: build/
 
       - name: Initialize Node.JS for this job
