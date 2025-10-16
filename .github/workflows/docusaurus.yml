@@ -62,6 +62,6 @@ jobs:
       id-token: write
     runs-on: ubuntu-24.04
     steps:
-      - name: Deplot to GitHub Pages
+      - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
  
